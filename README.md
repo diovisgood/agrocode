@@ -251,7 +251,7 @@ be related to the anchor embeddings, which model uses.
 I can hardly ever beat *huge and heavily trained models*, which gain the highest scores in the leaderboard.
 I believe, though, my idea is right and my model is robust to the new unexpected texts.
 
-My ideas about huge, highly overfitted models, which gain top scores in competitions,
+My thoughts about huge, highly overfitted models, which gain top scores in competitions,
 are best said by Michał Marcinkiewicz in his article:
 ["The Real World is not a Kaggle Competition"](https://www.netguru.com/codestories/real-world-is-not-a-kaggle-competition).
 
