@@ -177,8 +177,8 @@ which is even worse than in the baseline (0.38)!
 ### Conclusion
 
 I believe, the poor performance of Transformer architecture
-is the **small training dataset**, which has only **294 records**!
-Note, that you need to split this dataset into tran and validation parts,
+is due to the **small training dataset**, which has only **294 records**!
+Note, that you need to split this dataset into train and validation parts,
 thus you've got small number of examples to learn on.
 
 ## Second Attempt - CatBoostClassifier
