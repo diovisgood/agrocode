@@ -204,6 +204,13 @@ For this project I used **45** keyword phrases, which produced **180** numerical
 for each text in training dataset.
 Note, that random forest algorithm does NOT need normalized features.
 
+> This approach has its limitations. It can not correctly understand negation. Example:
+> 
+> The owner says: **"My cow has no bleeding, only diarrhea"**
+>
+> The model sees the word: **bleeding** - it may consider a cow has an injury!
+> Because model can not understand the phrase 'has no bleeding'.
+
 To build the classifier I used the same approach as in the Baseline.
 
 The model is based on `sklearn.multiclass.OneVsRestClassifier` from scikit package,
@@ -242,7 +249,7 @@ This approach seem to work fine.
 It does not treat words as a set of unique tokens.
 Instead, it relies on the semantic meaning of a word, which is encoded in its embedding.
 
-Thus, model can (hopefully) manage to work with texts, **which it has never seen before**.
+Thus, model can (hopefully) manage to work with texts and words, **which it has never seen before**.
 Simply because the embeddings of the words in new texts will, somehow,
 be related to the anchor embeddings, which model uses.
 
@@ -254,6 +261,11 @@ I believe, though, my idea is right and my model is robust to the new unexpected
 My thoughts about huge, highly overfitted models, which gain top scores in competitions,
 are best said by Michał Marcinkiewicz in his article:
 ["The Real World is not a Kaggle Competition"](https://www.netguru.com/codestories/real-world-is-not-a-kaggle-competition).
+
+The approach I used has its limitations.
+Like said before, it can not correctly understand negation or any complex relations between words.
+A Transformer architecture is capable of doing so,
+but it requires much more training data than was given in this competition.
 
 Working on natural language processing is fun!
 
