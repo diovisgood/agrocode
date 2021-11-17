@@ -125,6 +125,46 @@ The basic idea is the following:
    and outputs **probabilities**, one for each target. 
 
 The source code for this class is in [agrocode_embeddings_transformer.py](agrocode_embeddings_transformer.py).
+Here is the source code of the main `forward` method of the neural net:
+
+```python
+    def forward(self, texts: List[str]):
+        # Convert batch of texts into tensor of embeddings
+        x, padding_mask, batch_offsets = self.texts2batch(texts)
+        # x has shape: (sequence_length, batch_size, d_model)
+        # padding_mask has shape: (batch_size, sequence_length)
+        # batch_offsets is the list of length of batch_size, which contains a list of offsets for each tag
+        
+        # Add positional information into x
+        x = self.position_encoder.forward(x, mask=padding_mask)
+        
+        # Initialize self-attention mask, so that words could attend only prior words.
+        attn_mask = None
+        if self.causal_mask:
+            attn_mask = th.full((len(x), len(x)), -math.inf, device=x.device, dtype=x.dtype)
+            attn_mask = th.triu(attn_mask, diagonal=1)
+
+        x = self.transformer_encoder.forward(x, mask=attn_mask, src_key_padding_mask=padding_mask)
+        # x still has shape (sequence_length, batch_size, d_model)
+        
+        # Combine source embeddings into one embedding, one for each target
+        attn_output, attn_weights = self.collect.forward(
+            query=self.targets.expand((self.num_targets, x.size(1), self.d_model)),
+            key=x,
+            value=x,
+            key_padding_mask=padding_mask,
+            need_weights=True
+        )
+        # attn_output has the shape: (num_targets, batch_size, d_model)
+        # attn_weights has the shape: (batch_size, num_targets, sequence_length)
+        
+        attn_output = attn_output.permute((1, 0, 2)).reshape(x.size(1), -1)
+        # attn_output now has the shape: (batch_size, num_targets * d_model)
+
+        output = th.sigmoid(self.output.forward(attn_output))
+        # output has the shape: (batch_size, num_targets)
+        
+```
 
 The training of this model is typical for all PyTorch project - the simple loop over training epochs.
 Training takes from several minutes to one hour at maximum.
@@ -132,7 +172,7 @@ Training takes from several minutes to one hour at maximum.
 ### Score
 
 Unfortunately, the result was unsatisfying, score on validation set was about **0.41** (the lower - the better),
-which is even more than in baseline (0.38)!
+which is even worse than in the baseline (0.38)!
 
 ### Conclusion
 
@@ -241,7 +281,7 @@ log.info('Done')
 ### Score
 
 The score on validation set was about **0.03** (the lower - the better),
-which is far better than in baseline (0.38)!
+which is far better than in the baseline (0.38)!
 
 ### Conclusion
 
