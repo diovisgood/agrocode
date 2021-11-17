@@ -13,9 +13,9 @@ there could be several diseases for some texts in the training set.
 I registered to participate, but somehow forgot about the _deadline_,
 which was 17 of November :)
 
-That is why the solutions I posted were marked as: **(out of competition)**.
+That is why the solutions I posted were marked as: **"out of competition"**.
 
-There were 47 participants, only 36 of which are *in competition*,
+There were 47 participants, only 36 of which were *"in competition"*,
 others, like me, have missed the deadline.
 
 ## Baseline
@@ -170,7 +170,7 @@ In this particular task they could be the **symptoms of different diseases**, li
 > `watery eyes`, `bloody urine`, `fever`, `convulsions`, etc. 
 
 The more various keywords you get - the better.
-But also it will require more to converge.
+But also it will require more time to converge.
 
 We need to compute their respective **embeddings**.
 When a keyword is a single word - it is merely its embedding.
@@ -243,13 +243,17 @@ It does not treat words as a set of unique tokens.
 Instead, it relies on the semantic meaning of a word, which is encoded in its embedding.
 
 Thus, model can (hopefully) manage to work with texts, **which it has never seen before**.
-Simply because the embeddings of the words in these texts will, somehow,
+Simply because the embeddings of the words in new texts will, somehow,
 be related to the anchor embeddings, which model uses.
 
 ## Final Thoughts
 
-Though, I can hardly ever beat huge and heavily trained models, which gain the highest scores in the leaderboard.
-I believe, my idea is right and my model is robust to the new unexpected texts.
+I can hardly ever beat *huge and heavily trained models*, which gain the highest scores in the leaderboard.
+I believe, though, my idea is right and my model is robust to the new unexpected texts.
+
+My ideas about huge, highly overfitted models, which gain top scores in competitions,
+are best said by Michał Marcinkiewicz in his article:
+["The Real World is not a Kaggle Competition"](https://www.netguru.com/codestories/real-world-is-not-a-kaggle-competition).
 
 Working on natural language processing is fun!
 
