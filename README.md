@@ -1,6 +1,6 @@
-# My Solution to AGRO CODE Competition
+# My Solution to Agro Code Contest
 
-In November 2021 there was a **Machine Learning competition** in Russia.
+In November 2021 there was a **Machine Learning contest** in Russia.
 You can read about it here (in russian, of course):
 
 [https://contest.ds.agro-code.ru/competition](https://contest.ds.agro-code.ru/competition)
@@ -15,7 +15,7 @@ which was 17 of November :)
 
 That is why the solutions I posted were marked as: **"out of competition"**.
 
-There were 47 participants, only 36 of which were *"in competition"*,
+There were about 50 participants, only 36 of which were *"in competition"*,
 others, like me, have missed the deadline.
 
 ## Baseline
